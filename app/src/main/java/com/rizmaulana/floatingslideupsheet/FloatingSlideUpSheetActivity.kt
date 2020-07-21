@@ -29,6 +29,7 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
             setBottomSheetCallback(bottomSheetBehaviorCallback)
             skipCollapsed = true
             isHideable = true
+            isFitToContents = false
         }
 
     }
@@ -48,11 +49,7 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
-            /*if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                card_floating_menu.visibility = View.VISIBLE
-            } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                card_floating_menu.visibility = View.GONE
-            }*/
+
 
         }
     }
@@ -92,10 +89,18 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
         val opacity = point.toFloat().div(100)
         content_expand_container.alpha = opacity
 
-        /*hide opacity = 0, visible 1.0*/
-        val quarterOfOpacity = opacity.times(4)
-        val cardOpacity = 1f.minus(quarterOfOpacity)
-        container_floating_menu.alpha = cardOpacity
+        /*hide opacity = 0, visible 1.0
+        * Card visible qOp = 0, invisible qOp = 1.0
+        * 20%
+        *
+        * 20/100
+        * */
+        val cardOpacity = 1f.minus(opacity)
+        val twentyPercentOpacity = cardOpacity.minus(0.8f).times(5f)
+
+        Log.d("RizkiM", "point $point opacityExpand $opacity opacityCard $cardOpacity QuartOp $twentyPercentOpacity")
+
+        container_floating_menu.alpha = twentyPercentOpacity
 
         if (point > 20) {
             content_expand_container.visibility = View.VISIBLE

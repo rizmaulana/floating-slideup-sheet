@@ -44,23 +44,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            app:cardBackgroundColor="#FFF"
+
+
+        <include layout="@layout/layout_expand_menu" />
+
+        <FrameLayout
+            android:background="@drawable/floating_menu_background"
             android:id="@+id/card_floating_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="32dp"
-            app:cardElevation="2dp">
+            android:layout_marginBottom="8dp">
 
             <include layout="@layout/layout_floating_menu" />
 
-        </androidx.cardview.widget.CardView>
-
-        <include layout="@layout/layout_expand_menu" />
+        </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
