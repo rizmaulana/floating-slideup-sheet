@@ -30,7 +30,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/container_background"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,23 +40,20 @@
     </ScrollView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:paddingBottom="24dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
+        android:layout_height="match_parent"
+        android:paddingBottom="24dp">
 
         <include layout="@layout/layout_expand_menu" />
 
         <FrameLayout
-            android:background="@drawable/floating_menu_background"
             android:id="@+id/card_floating_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginBottom="8dp">
+            android:background="@drawable/floating_menu_background">
 
             <include layout="@layout/layout_floating_menu" />
 

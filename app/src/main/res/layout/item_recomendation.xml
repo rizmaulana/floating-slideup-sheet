@@ -17,7 +17,7 @@
         <!-- Ilustration from : https://dribbble.com/shots/7033370-Hello-Dribbble -->
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="174dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_rec" />
 

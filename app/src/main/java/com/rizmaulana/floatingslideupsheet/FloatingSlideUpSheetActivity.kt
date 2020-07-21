@@ -1,14 +1,21 @@
 package com.rizmaulana.floatingslideupsheet
 
+import android.content.ClipData
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.DragShadowBuilder
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.marginLeft
 import androidx.core.view.marginRight
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import id.rizmaulana.floatingslideupsheet.listener.GestureDragDetector
+import id.rizmaulana.floatingslideupsheet.listener.GestureDragListener
+import id.rizmaulana.floatingslideupsheet.listener.OnGestureDragListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_expand_menu.*
 import kotlinx.android.synthetic.main.layout_floating_menu.*
@@ -24,11 +31,45 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
         parentLayout.paddingBottom
     }
 
+    private val gestureDetector by lazy {
+        GestureDragDetector(this, GestureDragListener(object : OnGestureDragListener {
+
+            override fun onStartMove() {
+                bottomSheetBehaviorCallback.onStateChanged(
+                    layout_expand,
+                    BottomSheetBehavior.STATE_DRAGGING
+                )
+
+
+            }
+
+            override fun onYMove(distance: Float, totalDistance: Float, x: Float, y: Float) {
+            //    bottomSheetBehaviorCallback.onSlide(layout_expand, -0.01f)
+               // bottomSheetBehaviour.setPeekHeight(totalDistance.toInt(), true)
+             //   bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+
+            }
+
+            override fun onCancel(totalDistance: Float) {
+                if (totalDistance > card_floating_menu.height) {
+                    expandBottomSheet()
+                } else {
+                    collapseBottomSheet()
+                }
+            }
+        }))
+    }
+
     private val bottomSheetBehaviour by lazy {
         BottomSheetBehavior.from(layout_expand).apply {
             setBottomSheetCallback(bottomSheetBehaviorCallback)
-            skipCollapsed = true
-            isHideable = true
+          //  skipCollapsed = true
+
+
+         //   isHideable = true
+
+            halfExpandedRatio = 0.999999f
+            peekHeight = 200
             isFitToContents = false
         }
 
@@ -36,6 +77,8 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
 
     private val bottomSheetBehaviorCallback = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            Log.d("RizkiM", "Offset ${slideOffset.toString()}")
+
             /*-1.0 = Hide*/
             /*1.0 = Expanded*/
 
@@ -49,6 +92,7 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
+            Log.d("RizkiM", "New state ${newState}")
 
 
         }
@@ -89,16 +133,8 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
         val opacity = point.toFloat().div(100)
         content_expand_container.alpha = opacity
 
-        /*hide opacity = 0, visible 1.0
-        * Card visible qOp = 0, invisible qOp = 1.0
-        * 20%
-        *
-        * 20/100
-        * */
         val cardOpacity = 1f.minus(opacity)
         val twentyPercentOpacity = cardOpacity.minus(0.8f).times(5f)
-
-        Log.d("RizkiM", "point $point opacityExpand $opacity opacityCard $cardOpacity QuartOp $twentyPercentOpacity")
 
         container_floating_menu.alpha = twentyPercentOpacity
 
@@ -109,6 +145,13 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
             content_expand_container.visibility = View.INVISIBLE
             card_floating_menu.visibility = View.VISIBLE
         }
+        if (point < 10) {
+            layout_expand.visibility = View.INVISIBLE
+        } else {
+            layout_expand.visibility = View.VISIBLE
+        }
+        Log.d("RizkiM", "Point $point")
+
     }
 
 
@@ -121,9 +164,19 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        card_floating_menu.setOnClickListener {
-            expandBottomSheet()
-        }
+       /* card_floating_menu.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                gestureDetector.cancel()
+            }
+            gestureDetector.onTouchEvent(event)
+            true
+        }*/
+
+       /* card_floating_menu.setOnClickListener {
+            bottomSheetBehaviour.setPeekHeight(100, true)
+            bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+        }*/
+
 
     }
 
@@ -139,7 +192,7 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
     }
 
     private fun collapseBottomSheet() {
-        bottomSheetBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     private fun expandBottomSheet() {
