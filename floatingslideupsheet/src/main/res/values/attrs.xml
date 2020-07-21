@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FloatingSlideUpLayout">
+        <attr name="slide_menu_corner_radius" format="integer" />
+        <attr name="slide_menu_background_color" format="reference" />
+        <attr name="slide_margin_left" format="integer"/>
+        <attr name="slide_margin_right" format="integer"/>
+    </declare-styleable>
+</resources>

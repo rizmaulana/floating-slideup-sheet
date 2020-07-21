@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/slide_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/slide_layout_expand"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/slide_nested_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/slide_container_background"
+            android:scrollbars="none"
+            android:visibility="invisible">
+
+            <FrameLayout
+                android:id="@+id/slide_frame_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.core.widget.NestedScrollView>
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/slide_frame_floating_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

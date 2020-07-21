@@ -7,7 +7,6 @@
     android:background="@color/colorPrimary"
     tools:context=".FloatingSlideUpSheetActivity">
 
-
     <TextView
         android:id="@+id/txt_menu"
         android:layout_width="wrap_content"
@@ -39,27 +38,26 @@
         <include layout="@layout/layout_main_content" />
     </ScrollView>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <id.rizmaulana.floatingslideupsheet.view.FloatingSlideUpLayout
+        android:id="@+id/slide_conten"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="24dp">
-
-        <include layout="@layout/layout_expand_menu" />
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp">
 
         <FrameLayout
-            android:id="@+id/card_floating_menu"
+            android:id="@+id/first"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/floating_menu_background">
+            android:layout_height="80dp">
 
             <include layout="@layout/layout_floating_menu" />
 
         </FrameLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <include layout="@layout/layout_expand_menu"/>
 
+
+    </id.rizmaulana.floatingslideupsheet.view.FloatingSlideUpLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
