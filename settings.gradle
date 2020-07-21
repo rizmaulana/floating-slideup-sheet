@@ -1,0 +1,3 @@
+include ':floatingslideupsheet'
+include ':app'
+rootProject.name = "FloatingSlideUpSheet"
