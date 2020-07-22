@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_expand"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <androidx.core.widget.NestedScrollView
+        android:visibility="invisible"
+        android:background="@drawable/container_background"
         android:id="@+id/nested_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/container_background"
-        android:scrollbars="none"
-        android:visibility="invisible">
+        android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/content_expand_container"
@@ -268,28 +268,28 @@
 
             </LinearLayout>
 
-            <include layout="@layout/item_recomendation" />
+            <include layout="@layout/item_recomendation"/>
 
-            <include layout="@layout/item_recomendation" />
+            <include layout="@layout/item_recomendation"/>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/card_floating_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
+        android:layout_gravity="bottom">
 
         <include layout="@layout/layout_floating_menu" />
 
 
-    </FrameLayout>
+    </LinearLayout>
 
 
-</FrameLayout>
+</RelativeLayout>
 
 
 

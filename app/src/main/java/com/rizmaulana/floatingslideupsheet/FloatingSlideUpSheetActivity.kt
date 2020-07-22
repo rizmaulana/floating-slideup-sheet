@@ -15,7 +15,6 @@ import androidx.core.view.marginTop
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import id.rizmaulana.floatingslideupsheet.view.FloatingSlideUpBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_expand_menu.*
 import kotlinx.android.synthetic.main.layout_floating_menu.*
 
 
@@ -30,9 +29,9 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
 
     private fun initView() {
         FloatingSlideUpBuilder(this, slide_conten)
-            .setFloatingMenuRadiusInDp(64)
-            .setFloatingMenu(first)
-            .setPanel(layout_expand)
+            .setFloatingMenuRadiusInDp(32)
+            .setFloatingMenu(container_floating_menu)
+            .setPanel(content_expand_container)
             .build()
 
     }

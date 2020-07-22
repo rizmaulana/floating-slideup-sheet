@@ -3,7 +3,6 @@ package id.rizmaulana.floatingslideupsheet.view
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -14,8 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import id.rizmaulana.floatingslideupsheet.R
 import id.rizmaulana.floatingslideupsheet.helper.orZero
 import id.rizmaulana.floatingslideupsheet.helper.setColorAlpha
+import id.rizmaulana.floatingslideupsheet.helper.toDp
 import id.rizmaulana.floatingslideupsheet.helper.toPx
-import kotlinx.android.synthetic.main.layout_floating_slideup.view.*
 
 /**
  * rizmaulana 21/07/20.
@@ -45,7 +44,7 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
     }
 
     private val parentLayout by lazy {
-        panelExpandable.parent as CoordinatorLayout
+        panelExpandable.parent.parent as FloatingSlideUpLayout
     }
 
     private val defaultPaddingBottom by lazy {
@@ -53,12 +52,18 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
     }
 
     private val defaultPaddingLeft by lazy {
-        panelExpandable.paddingLeft
+        parentLayout.paddingLeft
     }
 
     private val defaultPaddingRight by lazy {
-        panelExpandable.paddingRight
+        parentLayout.paddingRight
     }
+
+    private val framePanel by lazy {
+        (rootView.findViewById<FrameLayout>(R.id.slide_layout_expand)
+            .getChildAt(0) as NestedScrollView).findViewById<FrameLayout>(R.id.slide_frame_panel)
+    }
+
 
     private val bottomSheetBehaviour by lazy {
         BottomSheetBehavior.from(panelExpandable).apply {
@@ -66,7 +71,7 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
 
             halfExpandedRatio = 0.999999f
             floatingMenuView?.post {
-                peekHeight = floatingMenuView?.height?.plus(48).orZero()
+                peekHeight = floatingMenuView?.height?.plus(12.toDp(context)).orZero()
             }
             isFitToContents = false
         }
@@ -128,9 +133,9 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
         viewGroup.removeView(floatingMenuView)
         viewGroup.removeView(panelView)
 
-        val framePanel = (rootView.findViewById<FrameLayout>(R.id.slide_layout_expand)
-            .getChildAt(0) as NestedScrollView).findViewById<FrameLayout>(R.id.slide_frame_panel)
-        val frameFloatingMenu = rootView.findViewById<FrameLayout>(R.id.slide_frame_floating_menu)
+
+        val frameFloatingMenu =
+            panelExpandable.findViewById<FrameLayout>(R.id.slide_frame_floating_menu)
 
         frameFloatingMenu.addView(floatingMenuView)
         framePanel.addView(panelView)
@@ -194,17 +199,17 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
 
     private fun listenSlideAlphaContent(point: Int) {
         val opacity = point.toFloat().div(100)
-        rootView.alpha = opacity
+        framePanel.alpha = opacity
 
         val cardOpacity = 1f.minus(opacity)
         val twentyPercentOpacity = cardOpacity.minus(0.8f).times(5f)
 
-        rootView.alpha = twentyPercentOpacity
+        floatingMenuView?.alpha = twentyPercentOpacity
 
 
         backgroundRoundedDrawable.cornerRadius =
-            menuRadius.minus((menuRadius.div(5).times(point))).toFloat()
-        if (point > 2) {
+            menuRadius.minus((menuRadius.div(5).times(point)))
+        if (point > 4) {
             nestedContent.visibility = View.VISIBLE
             floatingMenuView?.visibility = View.INVISIBLE
         } else {
@@ -214,11 +219,11 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
 
     }
 
-    private fun collapseBottomSheet() {
+    fun collapseBottomSheet() {
         bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
-    private fun expandBottomSheet() {
+    fun expandBottomSheet() {
         bottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
