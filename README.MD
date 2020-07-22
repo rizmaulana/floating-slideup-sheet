@@ -79,8 +79,13 @@ floatingSlideUpSheet.expandBottomSheet
 ```
 
 ## Todo
-Support dark mode
-Build floating menu from menu item
+
+- [ ] Support dark mode
+- [ ] Build floating menu from menu item
+- [ ] Eliminate code smells
+- [ ] Add test
+
+
 
 
 
