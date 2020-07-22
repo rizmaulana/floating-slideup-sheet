@@ -118,12 +118,13 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
         return this
     }
 
-    fun build() {
+    fun build(): FloatingSlideUpBuilder {
         viewGroup.post {
             arrangeView()
             setMenuBackground()
             setBottomSheetBehaviour()
         }
+        return this
     }
 
     private fun arrangeView() {

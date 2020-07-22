@@ -28,12 +28,13 @@ class FloatingSlideUpSheetActivity : AppCompatActivity() {
 
 
     private fun initView() {
-        FloatingSlideUpBuilder(this, slide_conten)
+      val floatingSlideUpSheet =   FloatingSlideUpBuilder(this, slide_conten)
             .setFloatingMenuRadiusInDp(32)
             .setFloatingMenuColor(android.R.color.white)
             .setFloatingMenu(container_floating_menu)
             .setPanel(content_expand_container)
             .build()
+
 
     }
 
