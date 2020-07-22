@@ -4,7 +4,7 @@
 
 #### Interaction
 
-![alt text](https://github.com/rizmaulana/floating-slideup-sheet/blob/master/assets/ezgif.com-resize.gif)
+![alt text](https://github.com/rizmaulana/floating-slideup-sheet/blob/master/assets/ezgif.com-resize.gif | width=100)
 
 
 [![](https://jitpack.io/v/rizmaulana/floating-slideup-sheet.svg)](https://jitpack.io/#rizmaulana/floating-slideup-sheet)
