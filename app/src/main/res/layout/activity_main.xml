@@ -39,6 +39,7 @@
     </ScrollView>
 
     <id.rizmaulana.floatingslideupsheet.view.FloatingSlideUpLayout
+        tools:visibility="invisible"
         android:id="@+id/slide_conten"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
