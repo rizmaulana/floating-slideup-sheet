@@ -1,5 +1,8 @@
 # Floating SlideUp Sheet 🎉
 
+Simple and lightweight UI library for user new experience, combining floating bottom navigation and bottom sheet behaviour. Simple and beautiful.
+
+
 ![alt text](https://github.com/rizmaulana/floating-slideup-sheet/blob/master/assets/slideupmenu.png)
 
 #### Interaction
