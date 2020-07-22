@@ -52,11 +52,11 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
     }
 
     private val defaultPaddingLeft by lazy {
-        parentLayout.paddingLeft
+        panelExpandable.paddingLeft
     }
 
     private val defaultPaddingRight by lazy {
-        parentLayout.paddingRight
+        panelExpandable.paddingRight
     }
 
     private val framePanel by lazy {
@@ -133,18 +133,31 @@ class FloatingSlideUpBuilder(private val context: Context, private val viewGroup
         viewGroup.removeView(floatingMenuView)
         viewGroup.removeView(panelView)
 
-
         val frameFloatingMenu =
             panelExpandable.findViewById<FrameLayout>(R.id.slide_frame_floating_menu)
 
         frameFloatingMenu.addView(floatingMenuView)
         framePanel.addView(panelView)
 
+
         viewGroup.addView(rootView)
 
         panelView?.layoutParams = panelLayoutParams
         floatingMenuView?.layoutParams = floatingMenuLayoutParams
 
+        panelExpandable.setPadding(
+            viewGroup.paddingLeft,
+            panelExpandable.paddingTop,
+            viewGroup.paddingRight,
+            panelExpandable.paddingBottom
+        )
+
+        viewGroup.setPadding(
+            0,
+            viewGroup.paddingTop,
+            0,
+            viewGroup.paddingBottom
+        )
 
         rootView.layoutParams = rootView.layoutParams.apply {
             width = ViewGroup.LayoutParams.MATCH_PARENT
