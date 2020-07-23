@@ -14,6 +14,7 @@ Simple and lightweight UI library for user new experience, combining floating bo
 ![GitHub forks](https://img.shields.io/github/forks/rizmaulana/floating-slideup-sheet.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/rizmaulana/floating-slideup-sheet.svg)
 ![GitHub top language](https://img.shields.io/github/languages/top/rizmaulana/floating-slideup-sheet.svg)
+![Visitor](https://visitor-badge.laobi.icu/badge?page_id=rizmaulana.floating-slideup-sheet)
 
 
 
