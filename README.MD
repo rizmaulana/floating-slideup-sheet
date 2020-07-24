@@ -28,7 +28,8 @@ allprojects {
 	}
 }
 ```
-Add depedency
+Add dependency
+
 ```bash
 dependencies {
 	implementation 'com.github.rizmaulana:floating-slideup-sheet:0.1.0'
